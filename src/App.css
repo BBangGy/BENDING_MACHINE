@@ -1,8 +1,8 @@
 div{
   width: 100%;
+  margin: 0 auto;
   height: 100vh;
-  display: flex;
+  text-align: center;
   align-items: center;
-  justify-content: center;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

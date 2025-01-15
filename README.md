@@ -1,11 +1,26 @@
-# React + Vite
+# Vending Machine Mini Project 🎯
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 프로젝트 소개  
+이 프로젝트는 간단한 자판기 시스템을 구현한 미니 프로젝트입니다. 사용자가 자판기에 돈을 입금하고 원하는 상품을 선택하여 구매한 후, 잔돈을 반환받는 과정을 경험할 수 있도록 설계되었습니다.  
 
-Currently, two official plugins are available:
+## 주요 기능  
+- **돈 입금**: 사용자가 원하는 금액을 자판기에 입금할 수 있습니다.  
+- **상품 선택 및 구매**: 사용 가능한 금액 내에서 상품을 선택하고 구매할 수 있습니다.  
+- **잔돈 반환**: 상품 구매 후 남은 금액을 반환받을 수 있습니다.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 사용 기술  
+- **언어**: JavaScript, HTML, CSS  
+- **프레임워크**: React  
+  - React를 활용하여 SPA(Single Page Application) 형식으로 구현되었습니다.  
+  - 컴포넌트 기반 구조를 통해 유지보수와 확장성을 고려하였습니다.  
 
-# BENDING_MACHINE
-BENDING_MACHINE
+## 프로젝트 특징  
+- **직관적인 UI**: 사용자가 쉽게 입금, 상품 선택, 잔돈 반환을 이해하고 사용할 수 있도록 직관적인 사용자 인터페이스를 제공했습니다.  
+- **상태 관리**: React의 상태 관리 기능을 활용하여 현재 잔액, 선택한 상품 등의 데이터를 효율적으로 처리했습니다.  
+- **반응형 디자인**: 다양한 디바이스에서 원활하게 작동하도록 반응형으로 설계되었습니다.  
+
+## 실행 방법  
+1. 프로젝트 클론  
+   ```bash
+   git clone https://github.com/username/vending-machine.git
+   cd vending-machine

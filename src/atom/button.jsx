@@ -1,27 +1,31 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledButton = styled.button`
+const StyledButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => !["bgColor", "textColor", "size"].includes(prop),
+})`
   background-color: ${(props) => props.bgColor || "white"};
   color: ${(props) => props.textColor || "black"};
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   &:hover {
-    background-color: skyblue;
+    background-color:  rgb(161, 177, 246);
     color: white;
     transform: scale(1.1);
     transition: 0.1s ease;
   }
-  ${(props)=>
-    props.size==="small"&&
+
+  ${(props) =>
+    props.size === "small" &&
     `
-    width:9em;
-    height:auto;
+    width: 9em;
+    height: auto;
     font-size: 10px;
-    `
-  }
+    `}
+
   ${(props) =>
     props.size === "normal" &&
     `
@@ -39,9 +43,14 @@ const StyledButton = styled.button`
   `}
 `;
 
-export default function Button({ text, size = "normal", bgColor, textColor ,onClick}) {
+export default function Button({ text, size = "normal", bgColor, textColor, onClick }) {
   return (
-    <StyledButton size={size} bgColor={bgColor} textColor={textColor} onClick={onClick}>
+    <StyledButton
+      size={size}
+      bgColor={bgColor}
+      textColor={textColor}
+      onClick={onClick}
+    >
       {text}
     </StyledButton>
   );

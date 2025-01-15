@@ -1,31 +1,38 @@
 .bending-container{
     width: 70%;
     height: 100vh;
-    background-color: wheat;
+    background-color: rgb(248, 235, 235);
     display: flex;
     flex-direction: row;
+    border-radius: 5px;
 }
 .orderBox{
     width: 45%;
     height: 80%;
     margin-right: 3em;
-    background-color: antiquewhite;
+    background-color: white;
     display: flex;
+    border: 1px solid black;
     flex-direction: column;
+    border-radius: 5px;
 }
 .itemCollector {
     width: 100%;
     height: 60%;
-    background-color: aliceblue;
+    background-color: white;
     display: flex;
     flex-wrap: wrap; /* 아이템을 여러 줄로 나눔 */
     justify-content: space-around;
     align-items: center;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
 }
 
 .item {
-    width: 30%; /* 각 아이템의 너비를 조정 (3개씩 배치되도록 설정) */
-    height: 12em; /* 비율 유지 */
+    width: 120px; /* 각 아이템의 너비를 조정 (3개씩 배치되도록 설정) */
+    height: 10em; /* 비율 유지 */
+    background-color:rgb(206, 246, 237);
+    margin: 20px;
     border: solid black;
     border-radius: 5px;
     display: flex;
@@ -33,17 +40,25 @@
     justify-content: center;
     align-items: center;
 }
-
+.item span{
+    text-align: center;
+    background-color: aliceblue;
+    width: 9em;
+    font-size: 10px;
+}
 .item img {
-    width: 60%; /* 이미지가 부모의 크기에 맞도록 설정 */
-    height: 60%;
+    width: 60px; /* 이미지가 부모의 크기에 맞도록 설정 */
+    height: 60px;
 }
 
 .totalAmount{
     width: 100%;
-    height: 40%;
-    background-color: aquamarine;
+    height: 50%;
+    background-color: rgb(179, 15, 15);
     flex-direction: column;
+    border: 1px solid black;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 .box1{
     /* background-color: red; */
@@ -59,13 +74,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 49%;
+    width: 48%;
     height: 35px;
     padding-right: 10px;
     border-radius: 5px;
-    background-color: rgb(227, 188, 250);
+    background-color: rgb(161, 177, 246);
 }
-
 .label {
     font-weight: bold;
 }
@@ -83,10 +97,21 @@
     justify-content: space-around;
     align-items: center;
 }
+.second-input-display{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+    margin-left: 40px;
+    border-radius: 5px;
+}
 .box2 input{
     height: 35px;
     width: 50%;
     border:none;
+    margin-left: 30px;
     border-radius: 5px;
     color: lightgray;
 }
@@ -98,14 +123,87 @@
     justify-content: space-around;
     align-items: center;
 }
-.select-display{
+.select-display {
     width: 50%;
-    height: 9em;
+    height: 100%; /* 부모 요소의 높이에 맞춤 */
     border-radius: 5px;
-    background-color: rgb(227, 188, 250);
+    overflow:auto;
+    display: flex;
+    background-color:  rgb(161, 177, 246);
+    flex-direction: column; /* 이미지가 아래로 쌓이도록 설정 */
+    align-items: center;
+    padding: 5px;
+    gap: 5px; /* 선택된 항목 간격 */
+    box-sizing: border-box; /* 패딩 포함 크기 계산 */
 }
+
+.selected-drink-item {
+    width: 95%; /* 선택 항목 전체 너비를 조정 */
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* 텍스트와 이미지 정렬 */
+    background-color: aliceblue;
+    margin: 5px 0; /* 항목 간의 상하 간격 */
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* 패딩 포함 크기 계산 */
+}
+
+.selected-drink-item img {
+    width: 50px; /* 이미지 크기 */
+    height: 50px; /* 이미지 크기 */
+    margin-right: 10px; /* 이미지와 텍스트 간의 간격 */
+}
+
+
 .equipBox{
     width: 45%;
     height: 80%;
-    background-color: yellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 5px;
+}
+.myMoney{
+    width: 100%;
+    height: 10%;
+    background-color: aliceblue;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+.equippedDrink{
+    width: 100%;
+    height: 85%;
+    background-color:  rgb(179, 15, 15);
+    border-radius: 5px;
+    border: 1px solid black;
+}
+.completed{
+    width: 80%;
+    height: 80%;
+    border: 1px solid black;
+
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    overflow-y: scroll;
+    
+}
+.completed-item{
+    width: 95%; /* 선택 항목 전체 너비를 조정 */
+    height: auto;
+    display: flex;
+    justify-content: space-evenly; /* 텍스트와 이미지 정렬 */
+    background-color: aliceblue;
+    align-items: center;
+    margin: 5px 0; /* 항목 간의 상하 간격 */
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* 패딩 포함 크기 계산 */   
+}
+.completed-item img{
+    width: 50px; /* 이미지 크기 */
+    height: 50px; /* 이미지 크기 */
+    margin-right: 10px; /* 이미지와 텍스트 간의 간격 */
 }

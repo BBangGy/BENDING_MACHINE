@@ -2,7 +2,7 @@ import "./bendingMachine.css";
 import Button from "../../atom/button";
 import { useMoney } from "../../context/MoneyContext";
 import { useState, useEffect, useRef } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import coke from "../../assets/coke.png";
 import coke2 from "../../assets/coke2.png";
 import coke3 from "../../assets/coke3.png";
@@ -10,7 +10,18 @@ import coke4 from "../../assets/coke4.png";
 import coke5 from "../../assets/coke5.png";
 import coke6 from "../../assets/coke6.png";
 
+
 export default function BendingMachine() {
+  const initialItems = [
+    { id: 1, src: coke, alt: "Coke", name: "Original Coke 1", price: 1000, count: 5 },
+    { id: 2, src: coke2, alt: "Coke2", name: "Original Coke 2", price: 1000, count: 5 },
+    { id: 3, src: coke3, alt: "Coke3", name: "Original Coke 3", price: 1000, count: 5 },
+    { id: 4, src: coke4, alt: "Coke4", name: "Original Coke 4", price: 1000, count: 5 },
+    { id: 5, src: coke5, alt: "Coke5", name: "Original Coke 5", price: 1000, count: 5 },
+    { id: 6, src: coke6, alt: "Coke6", name: "Original Coke 6", price: 1000, count: 5 },
+  ];
+
+  const [items, setItems] = useState(initialItems); // items 상태 추가
   const [deposit, setDeposit] = useState("");
   const [balance, setBalance] = useState(0);
   const { money, setMoney } = useMoney();
@@ -19,23 +30,16 @@ export default function BendingMachine() {
   const scrollRef = useRef(null);
   const completeRef = useRef(null);
   const nav = useNavigate();
+
   useEffect(() => {
     if (completeRef.current) {
       completeRef.current.scrollTop = completeRef.current.scrollHeight;
     }
   }, [acquiredDrinks]);
 
-  //selectedDrinks가 변경될때마다 코드가 실행.
-  //useEffect:react의 라이프사이클 훅으로, 특정 상태나 props가 변경될때 실행
   useEffect(() => {
     if (scrollRef.current) {
-      //scrollRef.current = 해당 dom요소를 직접참조하며, 이를 통해 스크롤 위치를 조작.
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-      //scrollRef.current.scrollTop = 스크롤 컨테이너의 세로 스크롤 위치를 설정
-      //scrollRef.current.scrollHeight 스크롤 컨테이너의 전체 콘텐츠 높이를 나타낸다.
-      //scrollTop: 현재 스크롤 위치(픽셀 단위).
-      // scrollHeight: 전체 콘텐츠 높이(픽셀 단위).
-      // scrollRef.current.scrollTop = scrollRef.current.scrollHeight;는 스크롤을 컨텐츠의 맨 아래로 이동시키는 역할을 합니다.
     }
   }, [selectedDrinks]);
 
@@ -67,13 +71,28 @@ export default function BendingMachine() {
       alert("다시 입력");
     }
   };
+
   const onClickComplete = () => {
-    setAcquiredDrinks([...acquiredDrinks, ...selectedDrinks]);
-    setSelectedDrinks([]);
-    if (selectedDrinks.length == 0) {
+    if (selectedDrinks.length === 0) {
       alert("골라주세요.");
+      return;
     }
+
+    setAcquiredDrinks([...acquiredDrinks, ...selectedDrinks]);
+
+    // 음료 수량 감소
+    setItems((prevItems) =>
+      prevItems.map((item) => {
+        const selectedDrinkCount = selectedDrinks.filter((drink) => drink.id === item.id).length;
+        return selectedDrinkCount > 0
+          ? { ...item, count: item.count - selectedDrinkCount }
+          : item;
+      })
+    );
+
+    setSelectedDrinks([]);
   };
+
   const handleBuyDrink = (price, drink) => {
     if (balance > 0) {
       if (balance >= price) {
@@ -82,28 +101,20 @@ export default function BendingMachine() {
       } else {
         alert("잔액이 부족합니다.");
       }
-    } else if (balance <= 0) {
-      alert("잔액을 먼저 입력하세요.");
+    } else {
+      alert("입금액을 입력하세요.");
     }
   };
-
-  const items = [
-    { id: 1, src: coke, alt: "Coke", name: "Original Coke 1", price: 1000 },
-    { id: 2, src: coke2, alt: "Coke2", name: "Original Coke 2", price: 1000 },
-    { id: 3, src: coke3, alt: "Coke3", name: "Original Coke 3", price: 1000 },
-    { id: 4, src: coke4, alt: "Coke4", name: "Original Coke 4", price: 1000 },
-    { id: 5, src: coke5, alt: "Coke5", name: "Original Coke 5", price: 1000 },
-    { id: 6, src: coke6, alt: "Coke6", name: "Original Coke 6", price: 1000 },
-  ];
 
   return (
     <div className="bending-container">
       <div className="orderBox">
         <div className="itemCollector">
-          {items.map((item) => (
+          {items&&items.map((item) => (
             <div key={item.id} className="item">
               <img src={item.src} alt={item.alt} />
               <span>{item.name}</span>
+              <span>수량: {item.count}</span>
               <Button
                 size="small"
                 text={item.price + "원"}
@@ -131,17 +142,13 @@ export default function BendingMachine() {
                 onChange={handleInputChange}
               />
             </div>
-              <Button size="normal" onClick={onClickBalance} text="입금"></Button>
+            <Button size="normal" onClick={onClickBalance} text="입금"></Button>
           </div>
           <div className="box3">
             <div className="select-display" ref={scrollRef}>
               {selectedDrinks.map((drink, index) => (
                 <div key={index} className="selected-drink-item">
-                  <img
-                    src={drink.src}
-                    alt={drink.alt}
-                    className="selected-drink"
-                  />
+                  <img src={drink.src} alt={drink.alt} className="selected-drink" />
                   <span>{drink.name}</span>
                 </div>
               ))}
@@ -156,7 +163,7 @@ export default function BendingMachine() {
             <span className="label">소지금:</span>
             <span className="value">{money}원</span>
           </div>
-          <Button bgColor="white" text="충전" onClick={()=>nav("/")}></Button>
+          <Button bgColor="white" text="충전" onClick={() => nav("/")}></Button>
         </div>
         <div className="equippedDrink">
           <h3>획득한 음료</h3>

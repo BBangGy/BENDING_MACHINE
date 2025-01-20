@@ -20,7 +20,4 @@
 - **반응형 디자인**: 다양한 디바이스에서 원활하게 작동하도록 반응형으로 설계되었습니다.  
 
 ## 실행 방법  
-1. 프로젝트 클론  
-   ```bash
-   git clone https://github.com/username/vending-machine.git
-   cd vending-machine
+1. 노드 버전 v23.3.0
